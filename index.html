@@ -254,7 +254,7 @@
     .encastes-section { padding: 1rem 0.9rem; }
     .encastes-grid { grid-template-columns: 1fr; gap: 0.8rem; }
     .enc-card { padding: 0.8rem 0.9rem; }
-    .enc-bloque p { font-size: 0.82rem; }
+    .enc-bloque p { font-size: 0.95rem; line-height: 1.5; }
     .toros-section { padding: 1rem 0.9rem; }
     .toros-grid { grid-template-columns: 1fr; gap: 0.8rem; }
     .toro-card { overflow: hidden; }
@@ -520,11 +520,11 @@
           <th>Corrida</th><th>Nº</th><th>Ganadería</th>
           <th>Poder</th><th>Casta</th><th>Bravura</th><th>Nobleza</th>
           <th>Fiereza</th><th>Entrega</th><th>Humillación</th>
-          <th>Empujar debajo</th><th>Acudir de lejos</th><th>Media</th><th>Comentarios</th>
+          <th>Salida caballo</th><th>Empujar debajo</th><th>Acudir de lejos</th><th>Media</th><th>Comentarios</th>
         </tr>
       </thead>
       <tbody id="resumen-body">
-        <tr><td colspan="14" style="text-align:center;color:#bbb;padding:1.5rem;font-style:italic;">Vota los toros para ver el resumen</td></tr>
+        <tr><td colspan="15" style="text-align:center;color:#bbb;padding:1.5rem;font-style:italic;">Vota los toros para ver el resumen</td></tr>
       </tbody>
     </table>
   </div>
@@ -553,6 +553,7 @@ const CARS = [
   {k:'nobleza',l:'Nobleza'},{k:'fiereza',l:'Fiereza'},
   {k:'entrega',l:'Entrega'},{k:'humillacion',l:'Humillación'},
   {k:'varas',l:'Caballo/Varas', subcriterios: [
+    {k:'salida_caballo',l:'Salida del caballo'},
     {k:'empujar_debajo',l:'Empujar debajo'},
     {k:'acudir_lejos',l:'Acudir de lejos'}
   ]},
@@ -831,7 +832,7 @@ function actualizarResumen() {
       rows += `<tr><td>${c.nombre}</td><td style="text-align:center;font-weight:700">${nombreToro}</td><td>${c.ganads[i]}</td>${celdas}<td style="text-align:center"><span class="media-b">${med.toFixed(1)}</span></td><td style="text-align:left;font-size:0.75rem;max-width:200px;">${comentarios}</td></tr>`;
     }
   });
-  tbody.innerHTML = any ? rows : '<tr><td colspan="14" style="text-align:center;color:#bbb;padding:1.5rem;font-style:italic;">Vota los toros para ver el resumen</td></tr>';
+  tbody.innerHTML = any ? rows : '<tr><td colspan="15" style="text-align:center;color:#bbb;padding:1.5rem;font-style:italic;">Vota los toros para ver el resumen</td></tr>';
 }
 
 if (!cargarDeLocalStorage()) {
