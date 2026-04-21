@@ -519,12 +519,12 @@
         <tr>
           <th>Corrida</th><th>Nº</th><th>Ganadería</th>
           <th>Poder</th><th>Casta</th><th>Bravura</th><th>Nobleza</th>
-          <th>Fiereza</th><th>Mansed.</th><th>Entrega</th><th>Humillación</th>
+          <th>Fiereza</th><th>Entrega</th><th>Humillación</th>
           <th>Empujar debajo</th><th>Acudir de lejos</th><th>Media</th><th>Comentarios</th>
         </tr>
       </thead>
       <tbody id="resumen-body">
-        <tr><td colspan="15" style="text-align:center;color:#bbb;padding:1.5rem;font-style:italic;">Vota los toros para ver el resumen</td></tr>
+        <tr><td colspan="14" style="text-align:center;color:#bbb;padding:1.5rem;font-style:italic;">Vota los toros para ver el resumen</td></tr>
       </tbody>
     </table>
   </div>
@@ -550,7 +550,7 @@ const CORRIDAS = [
 
 const CARS = [
   {k:'poder',l:'Poder'},{k:'casta',l:'Casta'},{k:'bravura',l:'Bravura'},
-  {k:'nobleza',l:'Nobleza'},{k:'fiereza',l:'Fiereza'},{k:'mansedumbre',l:'Mansedumbre'},
+  {k:'nobleza',l:'Nobleza'},{k:'fiereza',l:'Fiereza'},
   {k:'entrega',l:'Entrega'},{k:'humillacion',l:'Humillación'},
   {k:'varas',l:'Caballo/Varas', subcriterios: [
     {k:'empujar_debajo',l:'Empujar debajo'},
@@ -831,7 +831,7 @@ function actualizarResumen() {
       rows += `<tr><td>${c.nombre}</td><td style="text-align:center;font-weight:700">${nombreToro}</td><td>${c.ganads[i]}</td>${celdas}<td style="text-align:center"><span class="media-b">${med.toFixed(1)}</span></td><td style="text-align:left;font-size:0.75rem;max-width:200px;">${comentarios}</td></tr>`;
     }
   });
-  tbody.innerHTML = any ? rows : '<tr><td colspan="15" style="text-align:center;color:#bbb;padding:1.5rem;font-style:italic;">Vota los toros para ver el resumen</td></tr>';
+  tbody.innerHTML = any ? rows : '<tr><td colspan="14" style="text-align:center;color:#bbb;padding:1.5rem;font-style:italic;">Vota los toros para ver el resumen</td></tr>';
 }
 
 if (!cargarDeLocalStorage()) {
