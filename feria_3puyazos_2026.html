@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Feria de 3 Puyazos 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+
+  :root {
+    --rojo: #8B0000;
+    --oro: #C5A028;
+    --crema: #FDF8EE;
+    --arena: #E8D8B0;
+    --gris: #2a2a2a;
+    --sombra: rgba(0,0,0,0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'EB Garamond', Georgia, serif;
+    background: var(--crema);
+    color: var(--gris);
+    min-height: 100vh;
+  }
+
+  header {
+    background: linear-gradient(135deg, #6a0000 0%, #3a0000 100%);
+    color: var(--crema);
+    text-align: center;
+    padding: 2rem 1rem 1.6rem;
+    border-bottom: 5px solid var(--oro);
+  }
+  header h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.6rem, 5vw, 2.6rem);
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    color: var(--oro);
+  }
+  header .sub { font-size: 1rem; margin-top: 0.3rem; font-style: italic; opacity: 0.88; }
+  header .orn { color: var(--oro); margin: 0.4rem 0; letter-spacing: 0.4em; font-size: 1.1rem; }
+
+  .barra-guardado {
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.55rem 1rem;
+    border-bottom: 2px solid var(--oro);
+  }
+  .barra-guardado span { font-family: 'Cinzel', serif; font-size: 0.72rem; color: #ccc; letter-spacing: 0.08em; }
+  .btn-g {
+    background: var(--rojo);
+    color: var(--crema);
+    border: 1px solid var(--oro);
+    border-radius: 3px;
+    padding: 0.35rem 0.85rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: background 0.18s;
+    touch-action: manipulation;
+  }
+  .btn-g:hover { background: #6a0000; }
+  .btn-g.sec2 { background: #333; border-color: #666; }
+  .btn-g.sec2:hover { background: #555; }
+  #estado-guardado { font-size: 0.68rem; color: #aaa; font-style: italic; width: 100%; text-align: center; }
+
+  nav {
+    background: var(--gris);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.2rem;
+    padding: 0.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 3px solid var(--oro);
+  }
+  nav a {
+    color: var(--crema);
+    text-decoration: none;
+    padding: 0.35rem 0.7rem;
+    border-radius: 3px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    transition: background 0.18s;
+    border: 1px solid transparent;
+  }
+  nav a:hover, nav a:active { background: var(--rojo); border-color: var(--oro); color: var(--oro); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 1.2rem 0.8rem 4rem; }
+
+  .corrida {
+    margin-bottom: 2.5rem;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 3px 16px var(--sombra);
+    overflow: hidden;
+    border: 1px solid var(--arena);
+  }
+  .corrida-header {
+    background: linear-gradient(135deg, var(--rojo) 0%, #5a0000 100%);
+    color: var(--crema);
+    padding: 1.2rem 1.5rem;
+    border-bottom: 3px solid var(--oro);
+  }
+  .corrida-header .tipo { font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.2em; color: var(--oro); margin-bottom: 0.25rem; }
+  .corrida-header h2 { font-family: 'Cinzel', serif; font-size: clamp(1.1rem, 3.5vw, 1.5rem); font-weight: 700; line-height: 1.2; }
+  .corrida-header .ganads { margin-top: 0.4rem; font-size: 0.88rem; font-style: italic; opacity: 0.88; }
+
+  .encastes-section { padding: 1.2rem 1.5rem; background: #fefaf2; border-bottom: 2px solid var(--arena); }
+  .encastes-section h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    color: var(--rojo);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.9rem;
+    border-bottom: 1px solid var(--arena);
+    padding-bottom: 0.35rem;
+  }
+  .encastes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 0.9rem; }
+  .enc-card { background: white; border: 1px solid var(--arena); border-left: 4px solid var(--oro); border-radius: 4px; padding: 0.9rem 1rem; }
+  .enc-card h4 { font-family: 'Cinzel', serif; font-size: 0.82rem; color: var(--rojo); margin-bottom: 0.55rem; font-weight: 700; }
+  .enc-bloque { margin-bottom: 0.5rem; }
+  .enc-bloque strong { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: #777; margin-bottom: 0.1rem; }
+  .enc-bloque p { font-size: 0.87rem; line-height: 1.45; color: #3a3a3a; }
+
+  .toros-section { padding: 1.2rem 1.5rem; }
+  .toros-section h3 { font-family: 'Cinzel', serif; font-size: 0.85rem; color: var(--rojo); letter-spacing: 0.1em; margin-bottom: 1rem; border-bottom: 1px solid var(--arena); padding-bottom: 0.35rem; }
+  .toros-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
+
+  .toro-card { background: #fefcf8; border: 1px solid var(--arena); border-radius: 5px; overflow: hidden; }
+  .toro-hdr { background: var(--gris); color: var(--crema); padding: 0.6rem 0.9rem; display: flex; align-items: center; gap: 0.7rem; }
+  .toro-num { background: var(--oro); color: var(--gris); font-family: 'Cinzel', serif; font-weight: 900; font-size: 1.1rem; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .toro-info h4 { font-family: 'Cinzel', serif; font-size: 0.9rem; display: flex; align-items: center; gap: 0.3rem; }
+  .toro-info input {
+    background: transparent;
+    border: none;
+    color: var(--crema);
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 0;
+    outline: none;
+    border-bottom: 1px dashed var(--oro);
+    width: auto;
+    min-width: 60px;
+    max-width: 150px;
+    cursor: text;
+  }
+  .toro-info input:focus { border-bottom-style: solid; background: rgba(197, 160, 40, 0.1); }
+  .toro-info small { font-size: 0.76rem; opacity: 0.78; font-style: italic; }
+
+  .toro-vot { padding: 0.75rem 0.9rem; }
+  .car-row { display: flex; align-items: center; margin-bottom: 0.45rem; gap: 0.4rem; }
+  .car-lbl { font-size: 0.72rem; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.04em; width: 95px; flex-shrink: 0; }
+  .btns-wrap { display: flex; gap: 2px; flex: 1; }
+  .btns-wrap button {
+    flex: 1;
+    min-width: 0;
+    height: 22px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 2px;
+    font-size: 0.68rem;
+    font-family: 'Cinzel', serif;
+    cursor: pointer;
+    transition: all 0.12s;
+    color: #888;
+    padding: 0;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btns-wrap button:hover { background: var(--arena); border-color: var(--oro); color: #333; }
+  .btns-wrap button.s-low  { background: #8B0000; border-color: #8B0000; color: white; font-weight: 700; }
+  .btns-wrap button.s-mid  { background: #8B6914; border-color: #8B6914; color: white; font-weight: 700; }
+  .btns-wrap button.s-high { background: #1a6b1a; border-color: #1a6b1a; color: white; font-weight: 700; }
+
+  .score-val { font-family: 'Cinzel', serif; font-size: 0.78rem; font-weight: 700; color: var(--rojo); width: 22px; text-align: right; flex-shrink: 0; }
+
+  .toro-foot { background: var(--arena); border-top: 1px solid #ddd; padding: 0.45rem 0.9rem; display: flex; justify-content: space-between; align-items: center; font-family: 'Cinzel', serif; }
+  .toro-foot .lbl { font-size: 0.75rem; color: #666; }
+  .toro-foot .val { font-size: 1rem; font-weight: 700; color: var(--rojo); }
+  .btn-reset { background: none; border: 1px solid #bbb; border-radius: 3px; font-size: 0.68rem; color: #999; cursor: pointer; padding: 0.18rem 0.45rem; font-family: serif; touch-action: manipulation; }
+  .btn-reset:hover { border-color: var(--rojo); color: var(--rojo); }
+
+  .resumen-section { background: white; border: 2px solid var(--arena); border-radius: 6px; padding: 1.3rem 1.5rem; margin-bottom: 2rem; box-shadow: 0 2px 10px var(--sombra); }
+  .resumen-section h2 { font-family: 'Cinzel', serif; color: var(--rojo); font-size: 1.1rem; margin-bottom: 0.9rem; border-bottom: 2px solid var(--arena); padding-bottom: 0.4rem; }
+  .acciones { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1rem; }
+  .btn-acc { background: var(--rojo); color: var(--crema); border: 2px solid var(--rojo); border-radius: 4px; padding: 0.55rem 1.1rem; font-family: 'Cinzel', serif; font-size: 0.78rem; letter-spacing: 0.06em; cursor: pointer; transition: all 0.18s; touch-action: manipulation; }
+  .btn-acc:hover { background: var(--crema); color: var(--rojo); }
+  .btn-acc.sec { background: transparent; color: #666; border-color: #ccc; }
+  .btn-acc.sec:hover { border-color: var(--rojo); color: var(--rojo); }
+
+  .tabla-wrap { overflow-x: auto; }
+  #tabla-resumen { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  #tabla-resumen th { background: var(--gris); color: var(--oro); font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.06em; padding: 0.5rem 0.55rem; text-align: left; white-space: nowrap; }
+  #tabla-resumen td { padding: 0.45rem 0.55rem; border-bottom: 1px solid #f0e8d0; white-space: nowrap; }
+  #tabla-resumen tr:hover td { background: #fdf5e0; }
+  .media-b { font-family: 'Cinzel', serif; font-weight: 700; font-size: 0.95rem; color: var(--rojo); }
+
+  footer { background: var(--gris); color: var(--crema); text-align: center; padding: 1rem; font-size: 0.78rem; border-top: 3px solid var(--oro); opacity: 0.9; }
+
+  @media (max-width: 480px) {
+    header { padding: 1.5rem 0.8rem 1.2rem; }
+    header h1 { font-size: 1.4rem; }
+    header .orn { font-size: 0.9rem; }
+    .barra-guardado { padding: 0.7rem 0.8rem; gap: 0.6rem; }
+    .barra-guardado span { font-size: 0.65rem; }
+    .btn-g { padding: 0.5rem 0.9rem; font-size: 0.68rem; }
+    #estado-guardado { font-size: 0.62rem; margin-top: 0.5rem; }
+    nav { padding: 0.6rem; gap: 0.3rem; }
+    nav a { padding: 0.5rem 0.8rem; font-size: 0.68rem; }
+    main { padding: 1rem 0.6rem 3rem; }
+    .corrida-header { padding: 1rem 1.2rem; }
+    .corrida-header h2 { font-size: 1.2rem; }
+    .corrida-header .ganads { font-size: 0.78rem; }
+    .encastes-section { padding: 1rem 1.2rem; }
+    .encastes-grid { grid-template-columns: 1fr; gap: 0.8rem; }
+    .enc-card { padding: 0.8rem 0.9rem; }
+    .enc-bloque p { font-size: 0.82rem; }
+    .toros-section { padding: 1rem 1.2rem; }
+    .toros-grid { grid-template-columns: 1fr; gap: 0.8rem; }
+    .toro-hdr { padding: 0.7rem 0.8rem; }
+    .toro-num { width: 1.8rem; height: 1.8rem; font-size: 0.9rem; }
+    .toro-info h4 { font-size: 0.8rem; }
+    .toro-info input { font-size: 0.8rem; min-width: 50px; max-width: 100px; }
+    .toro-info small { font-size: 0.68rem; }
+    .toro-vot { padding: 0.6rem 0.8rem; }
+    .car-row { margin-bottom: 0.6rem; gap: 0.3rem; align-items: flex-start; }
+    .car-lbl { width: 100%; font-size: 0.7rem; margin-bottom: 0.25rem; color: #888; }
+    .btns-wrap { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.15rem; width: 100%; }
+    .btns-wrap button {
+      height: 32px;
+      font-size: 0.75rem;
+      padding: 0;
+      border-radius: 3px;
+      -webkit-tap-highlight-color: rgba(197, 160, 40, 0.3);
+    }
+    .score-val { font-size: 0.85rem; width: 100%; text-align: center; margin-top: 0.25rem; }
+    .toro-foot { padding: 0.5rem 0.8rem; flex-wrap: wrap; gap: 0.5rem; }
+    .toro-foot .lbl { font-size: 0.7rem; }
+    .toro-foot .val { font-size: 0.95rem; }
+    .btn-reset { padding: 0.25rem 0.6rem; font-size: 0.65rem; }
+    .resumen-section { padding: 1rem 1.2rem; }
+    .acciones { gap: 0.5rem; }
+    .btn-acc { padding: 0.5rem 0.9rem; font-size: 0.72rem; }
+    #tabla-resumen { font-size: 0.68rem; }
+    #tabla-resumen th { padding: 0.4rem 0.35rem; font-size: 0.6rem; }
+    #tabla-resumen td { padding: 0.35rem 0.35rem; font-size: 0.62rem; }
+  }
+  @media print {
+    nav, .barra-guardado, .acciones, .btn-reset { display: none !important; }
+    .corrida { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; }
+    body { background: white; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="orn">— ✦ —</div>
+  <h1>FERIA DE 3 PUYAZOS</h1>
+  <div class="sub">Temporada 2026 · Votación de Toros por Encaste</div>
+  <div class="orn">— ✦ —</div>
+</header>
+
+<div class="barra-guardado">
+  <span>VOTACIONES:</span>
+  <button class="btn-g sec2" onclick="exportarCSV()">📊 Exportar CSV</button>
+  <button class="btn-g sec2" onclick="resetearTodo()" style="background:#5a0000;border-color:#8B0000;">🗑 Resetear todo</button>
+  <div id="estado-guardado">Autoguardado activo · Tus votos se guardan automáticamente</div>
+</div>
+
+<nav>
+  <a href="#novillada">Novillada</a>
+  <a href="#desafio1">Desafío I</a>
+  <a href="#desafio2">Desafío II</a>
+  <a href="#venteña">Palha</a>
+  <a href="#resumen">Resumen</a>
+</nav>
+
+<main>
+
+<!-- NOVILLADA -->
+<section class="corrida" id="novillada">
+  <div class="corrida-header">
+    <div class="tipo">Novillada con picadores</div>
+    <h2>Guardiola &amp; Isaías y Tulio Vázquez</h2>
+    <div class="ganads">Encaste Villamarta · Encaste García-Pedrajas</div>
+  </div>
+  <div class="encastes-section">
+    <h3>⚔ Encastes · Comportamiento esperado</h3>
+    <div class="encastes-grid">
+      <div class="enc-card">
+        <h4>Guardiola — Encaste Villamarta</h4>
+        <div class="enc-bloque">
+          <strong>Salida</strong>
+          <p>Toros de buen son y fijeza natural desde el primer capotazo. Hechuras armónicas de la mezcla Murube-Parladé-Santa Coloma con buen trapío. Salen sin nervio excesivo pero con presencia y movilidad.</p>
+        </div>
+        <div class="enc-bloque">
+          <strong>Varas</strong>
+          <p>El tercio de varas fue históricamente la gran seña del Villamarta: acuden con empuje y alegría, recargan con casta y crecen al castigo. Pelea de gran emoción en el centro del ruedo; son toros que saben meter los riñones.</p>
+        </div>
+        <div class="enc-bloque">
+          <strong>Muleta</strong>
+          <p>Dan series ligadas con nobleza creciente a medida que avanza la faena. Fondo variable: los mejores son de gran clase y humillan con profundidad. Pueden ser irregulares al inicio pero mejoran conforme el torero los encuentra.</p>
+        </div>
+      </div>
+      <div class="enc-card">
+        <h4>Isaías y Tulio Vázquez — Encaste García-Pedrajas</h4>
+        <div class="enc-bloque">
+          <strong>Salida</strong>
+          <p>Encaste Parladé-Murube de tipo aleonado y bajo de agujas. Salen con alegría y bravura encastada; el ganadero selecciona transmisión desde la salida "para bueno o para malo". Movimiento y son que conecta con el tendido desde toriles.</p>
+        </div>
+        <div class="enc-bloque">
+          <strong>Varas</strong>
+          <p>Su carta de presentación. La selección exige entre 6 y 8 varas en tienta con alegría, tranco y buen son. Acuden con codicia al caballo y replican el comportamiento bravo. Gran emoción y ambientazo en el primer tercio.</p>
+        </div>
+        <div class="enc-bloque">
+          <strong>Muleta</strong>
+          <p>Bravura con la aspereza propia del Pedrajas: los mejores son nobles y boyantes; otros pueden desarrollar sentido o quedarse cortos. Gustan al torista por la emoción e imprevisibilidad. No siempre fáciles pero siempre interesantes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="toros-section">
+    <h3>🐂 Novillos · 4 reses por orden de lidia</h3>
+    <div class="toros-grid" id="toros-novillada"></div>
+  </div>
+</section>
+
+<!-- DESAFÍO I -->
+<section class="corrida" id="desafio1">
+  <div class="corrida-header">
+    <div class="tipo">Corrida Desafío · I</div>
+    <h2>Reta &amp; Prieto de la Cal</h2>
+    <div class="ganads">Casta Navarra pura · Encaste Veragua (Casta Vazqueña pura)</div>
+  </div>
+  <div class="encastes-section">
+    <h3>⚔ Encastes · Comportamiento esperado</h3>
+    <div class="encastes-grid">
+      <div class="enc-card">
+        <h4>Reta — Casta Navarra pura</h4>
+        <div class="enc-bloque">
+          <strong>Salida</strong>
+          <p>Toros colorados de casta navarra pura, abantos de salida y extraordinariamente vivos. Su cabeza procesa más rápido que ningún otro encaste; aprenden en segundos. Exigen sometimiento inmediato desde el primer capotazo o el festejo se descontrola.</p>
+        </div>
+        <div class="enc-bloque">
+          <strong>Varas</strong>
+          <p>Comportamiento muy variable: los bravos acuden con una agilidad y fiereza únicas; los malos eluden al caballo con habilidad y arrastran dificultades. Pelea de gran emoción primitiva cuando la bravura aflora; el tercio de varas puede convertirse en persecución de manso o en batalla encendida.</p>
+        </div>
+        <div class="enc-bloque">
+          <strong>Muleta</strong>
+          <p>No van entregados ni humillan con facilidad; se revuelven rápido y tienen sentido de la distancia. Requieren toreros de gran oficio capaces de torearlos sobre las piernas. La emoción nace del peligro y la batalla, no de la serie larga. Faenas necesariamente cortas e intensas.</p>
+        </div>
+      </div>
+      <div class="enc-card">
+        <h4>Prieto de la Cal — Encaste Veragua (Casta Vazqueña pura)</h4>
+        <div class="enc-bloque">
+          <strong>Salida</strong>
+          <p>Única ganadería que conserva el encaste Veragua en pureza. Toros de gran trapío, capas jaboneras y berrendas características de la casta vazqueña. Salen con empuje y movilidad espectacular; la salida impresiona por su presencia y el son diferente con que reciben los engaños.</p>
+        </div>
+        <div class="enc-bloque">
+          <strong>Varas</strong>
+          <p>Gran seña de identidad según el propio ganadero. Acuden con codicia y bravura al caballo, empujan y reciben el castigo con fiereza. El tercio de varas es donde mejor demuestran su valentía y donde más se disfruta de su encaste genuino y diferente.</p>
+        </div>
+        <div class="enc-bloque">
+          <strong>Muleta</strong>
+          <p>Comportamiento exigente y diferente al 90% de los toros actuales. No ofrecen la duración ni la embestida boyante del Domecq. Requieren toreros con recursos y conocimiento de encaste. Aportan emoción genuina aunque las faenas sean de ritmo y profundidad distintos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="toros-section">
+    <h3>🐂 Toros · 6 reses por orden de lidia</h3>
+    <div class="toros-grid" id="toros-desafio1"></div>
+  </div>
+</section>
+
+<!-- DESAFÍO II -->
+<section class="corrida" id="desafio2">
+  <div class="corrida-header">
+    <div class="tipo">Corrida Desafío · II</div>
+    <h2>Dolores Aguirre &amp; José Escolar Gil</h2>
+    <div class="ganads">Encaste Conde de la Corte–Atanasio Fernández · Encaste Albaserrada</div>
+  </div>
+  <div class="encastes-section">
+    <h3>⚔ Encastes · Comportamiento esperado</h3>
+    <div class="encastes-grid">
+      <div class="enc-card">
+        <h4>Dolores Aguirre — Encaste Conde de la Corte / Atanasio Fernández</h4>
+        <div class="enc-bloque">
+          <strong>Salida</strong>
+          <p>Toros altos de agujas, aleonados, esqueleto imponente y cornamentas desarrolladas. El encaste Atanasio sale con relativa frialdad pero con una presencia que intimida. Se crecen a partir del primer tercio; la salida es solo el preludio de lo que viene.</p>
+        </div>
+        <div class="enc-bloque">
+          <strong>Varas</strong>
+          <p>Se crecen notablemente al castigo; meten los riñones y pelean con potencia ante el caballo. La selección de Dolores Aguirre primó siempre el trapío, la fiereza y la transmisión. Tercio de varas de gran emoción e intensidad con los mejores ejemplares.</p>
+        </div>
+        <div class="enc-bloque">
+          <strong>Muleta</strong>
+          <p>Obedecen a los toques y embisten con nobleza y suavidad cuando se les torea bien; la calidad de embestida prima sobre la bravura pura. Toros de gran clase posible en muleta si el matador tiene recursos. Humillan y transmiten con profundidad.</p>
+        </div>
+      </div>
+      <div class="enc-card">
+        <h4>José Escolar Gil — Encaste Albaserrada</h4>
+        <div class="enc-bloque">
+          <strong>Salida</strong>
+          <p>Toros cárdenos y negros entrepelados de encaste Saltillo-Santa Coloma. Salen fríos y reservones, midiendo los terrenos desde el primer instante con gran inteligencia. Aprenden extraordinariamente rápido; someterlos desde el inicio es obligatorio o la lidia se desmorona.</p>
+        </div>
+        <div class="enc-bloque">
+          <strong>Varas</strong>
+          <p>Duros y encastados ante el caballo; entregados y espectaculares cuando son bravos. El tercio de varas es de gran intensidad y emoción. Deben ser bien picados: si aprenden en el primer tercio, la muleta se complica gravemente.</p>
+        </div>
+        <div class="enc-bloque">
+          <strong>Muleta</strong>
+          <p>Exigentes e inteligentes: humillan con la cara muy baja y admiten largas tandas citados a media distancia si se les empapa bien. Transmiten con enorme intensidad. No perdonan errores; aprenden rápido y se ponen muy peligrosos. Máxima emoción para el aficionado torista.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="toros-section">
+    <h3>🐂 Toros · 6 reses por orden de lidia</h3>
+    <div class="toros-grid" id="toros-desafio2"></div>
+  </div>
+</section>
+
+<!-- VENTEÑA PALHA -->
+<section class="corrida" id="venteña">
+  <div class="corrida-header">
+    <div class="tipo">Corrida Venteña</div>
+    <h2>Palha</h2>
+    <div class="ganads">Encaste mixto: Pinto Barreiros · García-Pedrajas · Baltasar Ibán — Quinta da Foz, Portugal</div>
+  </div>
+  <div class="encastes-section">
+    <h3>⚔ Encaste · Comportamiento esperado</h3>
+    <div class="encastes-grid">
+      <div class="enc-card">
+        <h4>Palha — Joao Folque de Mendoça</h4>
+        <div class="enc-bloque">
+          <strong>Salida</strong>
+          <p>Toros de gran alzada, astas poderosas e impacto visual imponente. La ganadería selecciona expresamente casta, poder y fiereza como valores irrenunciables. La irregularidad entre ejemplares es característica de su sangre mixta, lo que añade imprevisibilidad y tensión desde toriles. No aptos para toreros sin oficio y verdad.</p>
+        </div>
+        <div class="enc-bloque">
+          <strong>Varas</strong>
+          <p>El caballo es para el ganadero "el termómetro de la bravura". Los de Palha entran al picador con convicción y ánimo dominador; hacen peligrar el equilibrio de los caballos y ofrecen un primer tercio de enorme emoción y espectacularidad. La bravura en varas es su principal aval y rasgo más reconocible.</p>
+        </div>
+        <div class="enc-bloque">
+          <strong>Muleta</strong>
+          <p>Requieren toreros con verdad, poder y firmeza. Los bravos permiten destellos de gran embestida con transmisión; otros exigen lidia sobre las piernas. Las sangres mezcladas dan variedad total: desde faenas de gloria hasta tardes de batalla épica. El aficionado torista los espera como una de las citas más apasionantes de la temporada.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="toros-section">
+    <h3>🐂 Toros · 6 reses por orden de lidia</h3>
+    <div class="toros-grid" id="toros-venteña"></div>
+  </div>
+</section>
+
+<!-- RESUMEN -->
+<section class="resumen-section" id="resumen">
+  <h2>📊 Resumen de Votaciones</h2>
+  <div class="tabla-wrap">
+    <table id="tabla-resumen">
+      <thead>
+        <tr>
+          <th>Corrida</th><th>Nº</th><th>Ganadería</th>
+          <th>Poder</th><th>Casta</th><th>Bravura</th><th>Nobleza</th>
+          <th>Fiereza</th><th>Mansed.</th><th>Entrega</th><th>Varas</th><th>Media</th>
+        </tr>
+      </thead>
+      <tbody id="resumen-body">
+        <tr><td colspan="12" style="text-align:center;color:#bbb;padding:1.5rem;font-style:italic;">Vota los toros para ver el resumen</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Feria de 3 Puyazos 2026 · Tus votos se guardan automáticamente en el navegador
+</footer>
+
+<script>
+const CORRIDAS = [
+  { id:'novillada', nombre:'Novillada', num:4,
+    ganads:['Guardiola','Guardiola','Isaías y Tulio Vázquez','Isaías y Tulio Vázquez'] },
+  { id:'desafio1', nombre:'Desafío I', num:6,
+    ganads:['Reta','Reta','Reta','Prieto de la Cal','Prieto de la Cal','Prieto de la Cal'] },
+  { id:'desafio2', nombre:'Desafío II', num:6,
+    ganads:['Dolores Aguirre','Dolores Aguirre','Dolores Aguirre','José Escolar Gil','José Escolar Gil','José Escolar Gil'] },
+  { id:'venteña', nombre:'Venteña · Palha', num:6,
+    ganads:['Palha','Palha','Palha','Palha','Palha','Palha'] },
+];
+
+const CARS = [
+  {k:'poder',l:'Poder'},{k:'casta',l:'Casta'},{k:'bravura',l:'Bravura'},
+  {k:'nobleza',l:'Nobleza'},{k:'fiereza',l:'Fiereza'},{k:'mansedumbre',l:'Mansedumbre'},
+  {k:'entrega',l:'Entrega'},{k:'varas',l:'Caballo/Varas'},
+];
+
+let votos = {};
+
+function marcarPendiente() {
+  document.getElementById('estado-guardado').textContent = '⚠ Cambios sin guardar — pulsa "Guardar fichero"';
+}
+
+function claseBoton(n) {
+  if (n >= 8) return 's-high';
+  if (n >= 5) return 's-mid';
+  return 's-low';
+}
+
+function media(key) {
+  const vals = Object.values(votos[key] || {}).filter(x => x > 0);
+  return vals.length ? vals.reduce((a,b)=>a+b,0)/vals.length : 0;
+}
+
+function renderCorrida(corrida) {
+  const cont = document.getElementById('toros-' + corrida.id);
+  cont.innerHTML = '';
+
+  for (let i = 0; i < corrida.num; i++) {
+    const idx = i + 1;
+    const key = corrida.id + '_' + idx;
+    if (!votos[key]) votos[key] = {};
+    if (!votos[key].nombre) votos[key].nombre = idx.toString();
+
+    let rows = '';
+    CARS.forEach(car => {
+      const v = votos[key][car.k] || 0;
+      let btns = '';
+      for (let n = 1; n <= 10; n++) {
+        const cls = v === n ? claseBoton(n) : '';
+        btns += `<button class="${cls}" data-key="${key}" data-car="${car.k}" data-n="${n}">${n}</button>`;
+      }
+      rows += `<div class="car-row">
+        <span class="car-lbl">${car.l}</span>
+        <div class="btns-wrap" id="bw-${key}-${car.k}">${btns}</div>
+        <span class="score-val" id="sv-${key}-${car.k}">${v||'—'}</span>
+      </div>`;
+    });
+
+    const med = media(key);
+    const nombreToro = votos[key].nombre || idx.toString();
+    const card = document.createElement('div');
+    card.className = 'toro-card';
+    card.innerHTML = `
+      <div class="toro-hdr">
+        <div class="toro-num">${idx}</div>
+        <div class="toro-info">
+          <h4>
+            Toro nº 
+            <input type="text" 
+                   id="nombre-${key}" 
+                   value="${nombreToro}" 
+                   maxlength="15"
+                   onchange="guardarNombre('${key}', this.value)"
+                   placeholder="${idx}">
+          </h4>
+          <small>${corrida.ganads[i]}</small>
+        </div>
+      </div>
+      <div class="toro-vot">${rows}</div>
+      <div class="toro-foot">
+        <span class="lbl">MEDIA</span>
+        <span class="val" id="tot-${key}">${med>0?med.toFixed(1):'—'}</span>
+        <button class="btn-reset" onclick="resetToro('${key}')">↺ Limpiar</button>
+      </div>`;
+    cont.appendChild(card);
+  }
+
+  cont.addEventListener('click', e => {
+    const btn = e.target.closest('button[data-key]');
+    if (!btn) return;
+    votar(btn.dataset.key, btn.dataset.car, parseInt(btn.dataset.n));
+  });
+}
+
+function guardarEnLocalStorage() {
+  const data = { version:1, fecha:new Date().toISOString(), feria:'Feria de 3 Puyazos 2026', votos };
+  localStorage.setItem('votaciones_3puyazos_2026', JSON.stringify(data));
+  document.getElementById('estado-guardado').textContent = '✓ Autoguardado: ' + new Date().toLocaleTimeString('es-ES');
+}
+
+function cargarDeLocalStorage() {
+  const saved = localStorage.getItem('votaciones_3puyazos_2026');
+  if (saved) {
+    try {
+      const data = JSON.parse(saved);
+      if (data.votos) {
+        votos = data.votos;
+        document.getElementById('estado-guardado').textContent = '✓ Recuperado: ' + new Date().toLocaleTimeString('es-ES');
+        return true;
+      }
+    } catch(err) {
+      console.error('Error al cargar de localStorage:', err);
+    }
+  }
+  return false;
+}
+
+function guardarNombre(key, nombre) {
+  if (!votos[key]) votos[key] = {};
+  votos[key].nombre = nombre.trim() || '';
+  guardarEnLocalStorage();
+  actualizarResumen();
+}
+
+function votar(key, car, n) {
+  if (!votos[key]) votos[key] = {};
+  votos[key][car] = (votos[key][car] === n) ? 0 : n;
+  guardarEnLocalStorage();
+
+  const v = votos[key][car] || 0;
+  const bw = document.getElementById('bw-'+key+'-'+car);
+  if (bw) bw.querySelectorAll('button').forEach((b,i) => { b.className = (v===i+1) ? claseBoton(i+1) : ''; });
+  const sv = document.getElementById('sv-'+key+'-'+car);
+  if (sv) sv.textContent = v||'—';
+  const tot = document.getElementById('tot-'+key);
+  const med = media(key);
+  if (tot) tot.textContent = med>0 ? med.toFixed(1) : '—';
+  actualizarResumen();
+}
+
+function resetToro(key) {
+  const nombre = votos[key]?.nombre || '';
+  votos[key] = { nombre };
+  guardarEnLocalStorage();
+  CORRIDAS.forEach(c => { if (key.startsWith(c.id+'_')) renderCorrida(c); });
+  actualizarResumen();
+}
+
+function resetearTodo() {
+  if (!confirm('¿Borrar TODAS las votaciones?')) return;
+  votos = {};
+  localStorage.removeItem('votaciones_3puyazos_2026');
+  CORRIDAS.forEach(c => renderCorrida(c));
+  actualizarResumen();
+  document.getElementById('estado-guardado').textContent = 'Votaciones borradas';
+}
+
+function guardarJSON() {
+  const data = { version:1, fecha:new Date().toISOString(), feria:'Feria de 3 Puyazos 2026', votos };
+  const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'votaciones_3puyazos_2026.json'; a.click();
+  URL.revokeObjectURL(url);
+  document.getElementById('estado-guardado').textContent = '✓ Guardado: ' + new Date().toLocaleString('es-ES');
+}
+
+function cargarJSON(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (data.votos) {
+        votos = data.votos;
+        guardarEnLocalStorage();
+        CORRIDAS.forEach(c => renderCorrida(c));
+        actualizarResumen();
+        document.getElementById('estado-guardado').textContent = '✓ Cargado: ' + (data.fecha ? new Date(data.fecha).toLocaleString('es-ES') : file.name);
+      } else { alert('Fichero no válido'); }
+    } catch(err) { alert('Error al leer el fichero'); }
+    event.target.value = '';
+  };
+  reader.readAsText(file);
+}
+
+function exportarCSV() {
+  let csv = 'Corrida,Nº,Ganadería,' + CARS.map(c=>c.l).join(',') + ',Media\n';
+  CORRIDAS.forEach(c => {
+    for (let i = 0; i < c.num; i++) {
+      const key = c.id+'_'+(i+1);
+      const v = votos[key]||{};
+      const med = media(key);
+      const nombreToro = v.nombre || (i+1).toString();
+      csv += `"${c.nombre}","${nombreToro}","${c.ganads[i]}",`+CARS.map(car=>v[car.k]||'').join(',')+`,${med>0?med.toFixed(2):''}\n`;
+    }
+  });
+  const blob = new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href=url; a.download='votaciones_3puyazos_2026.csv'; a.click();
+  URL.revokeObjectURL(url);
+}
+
+function actualizarResumen() {
+  const tbody = document.getElementById('resumen-body');
+  let rows = ''; let any = false;
+  CORRIDAS.forEach(c => {
+    for (let i = 0; i < c.num; i++) {
+      const key = c.id+'_'+(i+1);
+      const v = votos[key]||{};
+      if (!Object.values(v).some(x=>x>0 && typeof x !== 'string')) continue;
+      any = true;
+      const med = media(key);
+      const nombreToro = v.nombre || (i+1).toString();
+      const celdas = CARS.map(car=>`<td style="text-align:center">${v[car.k]||'—'}</td>`).join('');
+      rows += `<tr><td>${c.nombre}</td><td style="text-align:center;font-weight:700">${nombreToro}</td><td>${c.ganads[i]}</td>${celdas}<td style="text-align:center"><span class="media-b">${med.toFixed(1)}</span></td></tr>`;
+    }
+  });
+  tbody.innerHTML = any ? rows : '<tr><td colspan="12" style="text-align:center;color:#bbb;padding:1.5rem;font-style:italic;">Vota los toros y pulsa Actualizar</td></tr>';
+}
+
+if (!cargarDeLocalStorage()) {
+  CORRIDAS.forEach(c => renderCorrida(c));
+} else {
+  CORRIDAS.forEach(c => renderCorrida(c));
+  actualizarResumen();
+}
+</script>
+</body>
+</html>
