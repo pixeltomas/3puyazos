@@ -208,7 +208,12 @@
   .btn-reset { background: none; border: 1px solid #bbb; border-radius: 3px; font-size: 0.68rem; color: #999; cursor: pointer; padding: 0.18rem 0.45rem; font-family: serif; touch-action: manipulation; }
   .btn-reset:hover { border-color: var(--rojo); color: var(--rojo); }
 
-  .toro-comentarios { padding: 0.8rem 0.9rem; border-top: 1px solid var(--arena); background: #faf8f4; }
+  .toro-entradas { padding: 0.5rem 0.9rem; border-top: 1px solid var(--arena); background: #faf8f4; display: flex; align-items: center; gap: 0.7rem; }
+  .entradas-lbl { font-size: 0.72rem; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
+  .entradas-num { width: 54px; padding: 0.22rem 0.4rem; border: 1px solid var(--arena); border-radius: 3px; font-family: 'Cinzel', serif; font-size: 0.9rem; font-weight: 700; color: var(--rojo); text-align: center; background: white; }
+  .entradas-num:focus { outline: none; border-color: var(--oro); box-shadow: 0 0 0 2px rgba(197,160,40,0.2); }
+
+  .toro-comentarios { padding: 0.8rem 0.9rem; background: #faf8f4; }
   .comentarios-lbl { display: block; font-size: 0.72rem; font-weight: 600; color: #666; margin-bottom: 0.4rem; }
   .comentarios-textarea { width: 100%; min-height: 60px; padding: 0.5rem; border: 1px solid var(--arena); border-radius: 3px; font-family: 'EB Garamond', Georgia, serif; font-size: 0.85rem; resize: vertical; box-sizing: border-box; }
   .comentarios-textarea:focus { outline: none; border-color: var(--oro); box-shadow: 0 0 0 2px rgba(197, 160, 40, 0.2); }
@@ -281,6 +286,9 @@
     .toro-foot .lbl { font-size: 0.7rem; }
     .toro-foot .val { font-size: 0.95rem; }
     .btn-reset { padding: 0.25rem 0.6rem; font-size: 0.65rem; }
+    .toro-entradas { padding: 0.5rem 0.8rem; gap: 0.5rem; }
+    .entradas-lbl { font-size: 0.65rem; }
+    .entradas-num { width: 50px; font-size: 0.85rem; }
     .toro-comentarios { padding: 0.6rem 0.8rem; }
     .comentarios-lbl { font-size: 0.65rem; }
     .comentarios-textarea { font-size: 0.75rem; min-height: 50px; }
@@ -520,11 +528,11 @@
           <th>Corrida</th><th>Nº</th><th>Ganadería</th>
           <th>Poder</th><th>Casta</th><th>Bravura</th><th>Nobleza</th>
           <th>Fiereza</th><th>Entrega</th><th>Humillación</th>
-          <th>Salida caballo</th><th>Empujar debajo</th><th>Acudir de lejos</th><th>Media</th><th>Comentarios</th>
+          <th>Salida caballo</th><th>Empujar debajo</th><th>Acudir de lejos</th><th>Ent. caballo</th><th>Media</th><th>Comentarios</th>
         </tr>
       </thead>
       <tbody id="resumen-body">
-        <tr><td colspan="15" style="text-align:center;color:#bbb;padding:1.5rem;font-style:italic;">Vota los toros para ver el resumen</td></tr>
+        <tr><td colspan="16" style="text-align:center;color:#bbb;padding:1.5rem;font-style:italic;">Vota los toros para ver el resumen</td></tr>
       </tbody>
     </table>
   </div>
@@ -574,7 +582,7 @@ function claseBoton(n) {
 function media(key) {
   const v = votos[key] || {};
   const vals = Object.entries(v)
-    .filter(([k, val]) => k !== 'nombre' && k !== 'comentarios' && k !== 'varas' && typeof val === 'number' && val > 0)
+    .filter(([k, val]) => k !== 'nombre' && k !== 'comentarios' && k !== 'varas' && k !== 'entradas_caballo' && typeof val === 'number' && val > 0)
     .map(([k, val]) => val);
   return vals.length ? vals.reduce((a,b)=>a+b,0)/vals.length : 0;
 }
@@ -628,6 +636,7 @@ function renderCorrida(corrida) {
     const med = media(key);
     const nombreToro = votos[key].nombre || idx.toString();
     const comentarios = votos[key].comentarios || '';
+    const entradasVal = votos[key].entradas_caballo !== undefined ? votos[key].entradas_caballo : '';
     const card = document.createElement('div');
     card.className = 'toro-card';
     card.innerHTML = `
@@ -647,6 +656,12 @@ function renderCorrida(corrida) {
         </div>
       </div>
       <div class="toro-vot">${rows}</div>
+      <div class="toro-entradas">
+        <span class="entradas-lbl">Nº entradas al caballo:</span>
+        <input type="number" class="entradas-num" id="entradas-${key}"
+               min="0" max="20" value="${entradasVal}" placeholder="—"
+               onchange="guardarEntradas('${key}', this.value)">
+      </div>
       <div class="toro-comentarios">
         <label class="comentarios-lbl">Comentarios:</label>
         <textarea id="comentarios-${key}" class="comentarios-textarea" onchange="guardarComentarios('${key}', this.value)" placeholder="Añade tus comentarios sobre este toro...">${comentarios}</textarea>
@@ -700,6 +715,19 @@ function guardarComentarios(key, comentarios) {
   if (!votos[key]) votos[key] = {};
   votos[key].comentarios = comentarios.trim();
   guardarEnLocalStorage();
+}
+
+function guardarEntradas(key, value) {
+  if (!votos[key]) votos[key] = {};
+  const trimmed = value.toString().trim();
+  if (trimmed === '') {
+    delete votos[key].entradas_caballo;
+  } else {
+    const n = parseInt(trimmed);
+    votos[key].entradas_caballo = isNaN(n) || n < 0 ? 0 : n;
+  }
+  guardarEnLocalStorage();
+  actualizarResumen();
 }
 
 function votar(key, car, n) {
@@ -777,7 +805,7 @@ function exportarCSV() {
       headers.push(car.l);
     }
   });
-  headers.push('Media','Comentarios');
+  headers.push('Ent. caballo','Media','Comentarios');
   let csv = headers.join(',') + '\n';
 
   CORRIDAS.forEach(c => {
@@ -796,8 +824,9 @@ function exportarCSV() {
           vals += (v[car.k]||'') + ',';
         }
       });
+      const entradas = v.entradas_caballo !== undefined ? v.entradas_caballo : '';
       const comentarios = v.comentarios || '';
-      csv += `"${c.nombre}","${nombreToro}","${c.ganads[i]}",${vals}${med>0?med.toFixed(2):''},"${comentarios.replace(/"/g, '""')}"\n`;
+      csv += `"${c.nombre}","${nombreToro}","${c.ganads[i]}",${vals}${entradas},${med>0?med.toFixed(2):''},"${comentarios.replace(/"/g, '""')}"\n`;
     }
   });
   const blob = new Blob([csv],{type:'text/csv;charset=utf-8;'});
@@ -828,11 +857,12 @@ function actualizarResumen() {
           celdas += `<td style="text-align:center">${v[car.k]||'—'}</td>`;
         }
       });
+      const entradas = v.entradas_caballo !== undefined ? v.entradas_caballo : '—';
       const comentarios = v.comentarios || '';
-      rows += `<tr><td>${c.nombre}</td><td style="text-align:center;font-weight:700">${nombreToro}</td><td>${c.ganads[i]}</td>${celdas}<td style="text-align:center"><span class="media-b">${med.toFixed(1)}</span></td><td style="text-align:left;font-size:0.75rem;max-width:200px;">${comentarios}</td></tr>`;
+      rows += `<tr><td>${c.nombre}</td><td style="text-align:center;font-weight:700">${nombreToro}</td><td>${c.ganads[i]}</td>${celdas}<td style="text-align:center;font-weight:700">${entradas}</td><td style="text-align:center"><span class="media-b">${med.toFixed(1)}</span></td><td style="text-align:left;font-size:0.75rem;max-width:200px;">${comentarios}</td></tr>`;
     }
   });
-  tbody.innerHTML = any ? rows : '<tr><td colspan="15" style="text-align:center;color:#bbb;padding:1.5rem;font-style:italic;">Vota los toros para ver el resumen</td></tr>';
+  tbody.innerHTML = any ? rows : '<tr><td colspan="16" style="text-align:center;color:#bbb;padding:1.5rem;font-style:italic;">Vota los toros para ver el resumen</td></tr>';
 }
 
 if (!cargarDeLocalStorage()) {
